@@ -1,10 +1,8 @@
-<<<<<<< HEAD
 =======
 DBCLS_SRA
 =========
 
 DBCLS Seq Read Archive
->>>>>>> dcb4fc1b4b59f7e80de98ff00bbcf71dbc020025
 
 
 いつまでもこのページがあるかというとそうでもないかもしれないし、
@@ -13,7 +11,7 @@ DBCLS Seq Read Archive
 ### mk.idTable.sra.3.pl
 * 各メタデータファイルの関係性を抽出する
 * 内容
-**自分自身のID抽出
+** 自分自身のID抽出
 *** Study
 **** <STUDY .*accession="(.RP\d{6})"
 *** Experiment
