@@ -1,4 +1,11 @@
-# DBCLS SRA
+<<<<<<< HEAD
+=======
+DBCLS_SRA
+=========
+
+DBCLS Seq Read Archive
+>>>>>>> dcb4fc1b4b59f7e80de98ff00bbcf71dbc020025
+
 
 いつまでもこのページがあるかというとそうでもないかもしれないし、
 この文が消えるのかもしれない、という
