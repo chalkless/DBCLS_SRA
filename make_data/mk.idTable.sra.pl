@@ -25,7 +25,7 @@ sub procdir {
 	}
 	elsif (-f $file) {
 	    if ($file =~ /xml$/) {
-		$file = /(.RA\d{6}).(.*?).xml/;
+		$file =~ /(.RA\d{6}).(.*?).xml/;
 		
 		$submission = $1;
 		$type = $2;
@@ -72,10 +72,59 @@ sub procdir {
 
 
 		    ### extracting link ID
+                    if ($line_in =~ /\<EXPERIMENT_REF .*accession="(.RX\d{6})"/)
+ {
+                        $exp_ref_tmp = $1;
+                        push @exps_ref, $exp_ref_tmp;
+                    }
+                    elsif ($line_in =~ /\<SAMPLE_DESCRIPTOR .*accession="(.RS\d{
+6})"/) {
+                        $sample_ref_tmp = $1;
+                        push @samples_ref, $sample_ref_tmp;
+                    }
+                    if ($line_in =~ /\<STUDY_REF .*accession="(.RP\d{6})"/) {                        $study_ref_tmp = $1;
+                        push @studies_ref, $study_ref_tmp;
+                    }
+
+                    if ($line_in =~ /\<TARGET .*accession="(.RX\d{6})"/) {
+                        $exp_ref_tmp = $1;
+                        push @exps_ref, $exp_ref_tmp;
+                    }
 
 
+		    ### print ID table
+                    if ($line_in =~ /\<\/(STUDY|EXPERIMENT|RUN|SAMPLE|ANALYSIS)\>/) {
+                        $study_out = join("\|", @studies);
+                        $exp_out = join("\|", @exps);
+                        $run_out = join("\|", @runs);
+                        $sample_out = join("\|", @samples);
+                        $analysis_out = join("\|", @analyses);
 
+                        $study_ref_out = join("\|", @studies_ref);
+                        $exp_ref_out = join("\|", @exps_ref);
+                        $sample_ref_out = join("\|", @samples_ref);
 
+                        $study_out = "-" if $study_out eq "";
+                        $exp_out = "-" if $exp_out eq "";
+                        $run_out = "-" if $run_out eq "";
+                        $analysis_out = "-" if $analysis_out eq "";
+                        $sample_out = "-" if $sample_out eq "";
+                        $study_ref_out = "-" if $study_ref_out eq "";
+                        $exp_ref_out = "-" if $exp_ref_out eq "";
+                        $sample_ref_out = "-" if $sample_ref_out eq "";
+
+                        print join("\t", $submission, $study_out, $exp_out, $run_out, $sample_out, $analysis_out, $study_ref_out, $exp_ref_out, $sample_ref_out)."\n";
+
+                        undef @studies;
+                        undef @exps;
+                        undef @runs;
+                        undef @samples;
+                        undef @analyses;
+                        undef @studies_ref;
+                        undef @exps_ref;
+                        undef @samples_ref;
+                    }
+                }
 
 		close (IN);
 	    }

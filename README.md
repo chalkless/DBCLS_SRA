@@ -16,3 +16,17 @@ DBCLS Seq Read Archive
   * Sample: <SAMPLE .\*accession="(\.RS\\d{6})"
   * Run: <RUN .\*accession="(\.RR\\d{6})"/
   * Analysis: <ANALYSIS .\*accession="(\.RZ\\d{6})"
+
+
+
+* リンク
+  * <EXPERIMENT_REF .*accession="(.RX\d{6})"
+  * <TARGET .*accession="(.RX\d{6})"
+
+  * <SAMPLE_DESCRIPTOR .*accession="(.RS\d{6})"
+  * <STUDY_REF .*accession="(.RP\d{6})"
+
+
+
+
+
