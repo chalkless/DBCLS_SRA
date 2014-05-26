@@ -8,6 +8,13 @@ DBCLS Seq Read Archive
 いつまでもこのページがあるかというとそうでもないかもしれないし、
 この文が消えるのかもしれない、という
 
+### mkdat.sh
+* 検索用データ作るのにこれが動く
+  * DDBJだのからSRAデータをミラーしてくる
+  * DDBJだのNCBIだのからBioProjectデータをミラーしてくる
+  *  EBIは? BioSampleは?
+
+
 ### mk.idTable.sra.3.pl
 * 各メタデータファイルの関係性を抽出する
 * 自分自身のID抽出
