@@ -1,9 +1,0 @@
-set ftp:use-mdtm no
-set ftp:timezone -9
-
-open ftp.ddbj.nig.ac.jp
-cd /ddbj_database/dra/fastq/
-lcd /share/data/sra/Submissions/
-mirror --delete --only-newer --verbose --include-glob "*.xml"
-close
-quit
