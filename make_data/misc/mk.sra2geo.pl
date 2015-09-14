@@ -60,7 +60,7 @@ sub procdir {
 		$id_geo = "-" if $id_geo eq "";
 		$id_ae  = "-" if $id_ae  eq "";
 
-		print join("\t", $id_srp, $id_biopj, $id_geo, $id_ae)."\n";
+		print join("\t", $id_srp, $id_biopj, $id_geo, $id_ae)."\n" if (($id_srp ne "-") or ($id_biopj ne "-") or ($id_geo ne "-") or ($id_ae ne "-"));
 
 		$id_srp = "";
 		$id_biopj = "";
