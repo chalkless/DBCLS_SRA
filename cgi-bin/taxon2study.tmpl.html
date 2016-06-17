@@ -1,0 +1,234 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+                      "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ja">
+<head>
+
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta http-equiv="content-style-type" content="text/css">
+<meta http-equiv="content-script-type" content="text/javascript">
+
+<link rel="stylesheet" type="text/css" href="../css/fonts/fonts-min.css">
+<link rel="stylesheet" type="text/css" href="../css/datatable/assets/skins/sam/datatable.css">
+<link rel="stylesheet" type="text/css" href="../css/paginator/assets/skins/sam/paginator.css">
+
+<script type="text/javascript" src="../js/yahoo-dom-event/yahoo-dom-event.js"></script>
+<script type="text/javascript" src="../js/connection/connection-min.js"></script>
+<script type="text/javascript" src="../js/json/json-min.js"></script>
+<script type="text/javascript" src="../js/element/element-min.js"></script>
+<script type="text/javascript" src="../js/paginator/paginator-min.js"></script>
+<script type="text/javascript" src="../js/datasource/datasource-min.js"></script>
+<script type="text/javascript" src="../js/datatable/datatable-min.js"></script>
+
+
+<script type="text/javascript">
+<!--
+
+YAHOO.util.Event.onContentReady("container", function() {
+
+  // Override the built-in formatter
+  YAHOO.widget.DataTable.formatLink1 = function(elCell, oRecord, oColumn, oData) {
+    var ra = oData;
+    elCell.innerHTML = "<a href=\"http://trace.ddbj.nig.ac.jp/DRASearch/submission?acc=" + ra + "\">" + ra + "</a>";
+  }
+
+  YAHOO.widget.DataTable.formatLink2 = function(elCell, oRecord, oColumn, oData) {
+    var rp = oData;
+    elCell.innerHTML = "<a href=\"http://trace.ddbj.nig.ac.jp/DRASearch/study?acc=" + rp + "\">" + rp + "</a>";
+  }
+
+  YAHOO.widget.DataTable.formatLink3 = function(elCell, oRecord, oColumn, oData) {
+    var exps = oData;
+    elCell.innerHTML = "<a href=\"./experimentlist.cgi?rp=" + oRecord.getData("rp") + "\" target=\"_blank\">" + exps + "</a>";
+  }
+
+  YAHOO.widget.DataTable.formatLink4 = function(elCell, oRecord, oColumn, oData) {
+    var runs = oData;
+    elCell.innerHTML = "<a href=\"./runlist.cgi?rp=" + oRecord.getData("rp") + "\" target=\"_blank\">" + runs + "</a>";
+  }
+
+  YAHOO.widget.DataTable.formatLink5 = function(elCell, oRecord, oColumn, oData) {
+    var taxon_id = oData;
+    elCell.innerHTML = "<a href=\"?taxon_id=" + taxon_id + "&taxon_tree=\">" + taxon_id + "</a>";
+  }
+
+
+  var columns = [
+    {key: "ra",  label: "SRA ID", sortable: true, formatter: YAHOO.widget.DataTable.formatLink1 },
+    {key: "rp",  label: "Study ID", sortable: true, formatter: YAHOO.widget.DataTable.formatLink2 },
+    {key: "study_title",    label: "Study Title",     sortable: true},
+    {key: "study_type",     label: "Study Type",      sortable: true},
+    {key: "taxon_id",       label: "Taxon ID",        sortable: true,   formatter: YAHOO.widget.DataTable.formatLink5 },
+    {key: "scientific_name",    label: "Taxon Name",  sortable: true},
+    {key: "exps",        label: "Exps",            sortable: true,  formatter: YAHOO.widget.DataTable.formatLink3 },
+    {key: "runs",        label: "Runs",            sortable: true, formatter: YAHOO.widget.DataTable.formatLink4 },
+    {key: "update_date",   label: "Update",         sortable: true}
+  ];
+
+  var dataSource = new YAHOO.util.DataSource("taxon2study.php");
+  dataSource.responseType = YAHOO.util.DataSource.TYPE_JSON;
+  dataSource.connXhrMode = "queueRequests";
+  dataSource.responseSchema = {
+    resultsList: "ResultSet.Result",
+    fields: ["ra", "rp", "study_title", "study_type", "taxon_id", "scientific_name", "exps", "runs", "update_date"]
+  };
+
+  var dataTable = new YAHOO.widget.DataTable("container", columns, dataSource, {
+    paginator: new YAHOO.widget.Paginator({
+      template : "{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}",
+      pageReportTemplate : "<span style=\"font-weight: bold; font-size: 120%;\">Total: {totalRecords}</span>",
+      rowsPerPage: 10,
+      rowsPerPageOptions : [10, 25, 50, 100]
+    }),
+    scrollable: true
+  });
+});
+
+
+// -->
+</script>
+
+<style type="text/css">
+ <!--
+    a {
+        text-decoration: none;
+    }
+
+    img {
+        border: 0px none blue;
+    }
+
+
+    .footer {
+         width: 100%;
+         border-top: 1px solid lightskyblue;
+         background-color: white;
+     }
+
+     .footer_msg {
+         margin: 10px;
+         text-align: center;
+	 font-size: 8pt;
+      }
+ -->
+ </style>
+
+<title>Project List (from taxonomy) - DBCLS SRA</title>
+
+</head>
+
+<body class="yui-skin-sam">
+
+<h1>Project List from taxonomy (&beta; version)</h1>
+
+<div style="text-align: right;">
+ <a href="../">&#8594; back to SRAs top</a>
+</div>
+
+<form action="taxon2study.cgi" method="get">
+<table>
+ <tr>
+ <th>
+ Study Type:
+ </th><td> 
+ <select id="type" name="type">
+  <option selected></option>
+  <option>Whole Genome Sequencing</option>
+  <option>Transcriptome Analysis</option>
+  <option>Metagenomics</option>
+  <option>Epigenetics</option>
+  <option>Resequencing</option>
+  <option>Other</option>
+  <option>RNASeq</option>
+  <option>Population Genomics</option>
+  <option>Gene Regulation Study</option>
+  <option>Cancer Genomics</option>
+  <option>Exome Sequencing</option>
+  <option>Pooled Clone Sequencing</option>
+  <option>Synthetic Genomics</option>
+  <option>Forensic or Paleo-genomics</option>
+ </select>
+ </td>
+ <th style="width: 100px; text-align:right;">
+ Platform:
+ </th><td>
+ <select id="platform" name="platform">
+  <option selected></option>
+  <option>Illumina Genome Analyzer IIx</option>
+  <option>Illumina Genome Analyzer II</option>
+  <option>Illumina Genome Analyzer</option>
+  <option>Illumina HiSeq 2000</option>
+  <option>Illumina MiSeq</option>
+  <option>454 GS FLX Titanium</option>
+  <option>454 GS FLX</option>
+  <option>454 Titanium</option>
+  <option>454 GS 20</option>
+  <option>454 GS Junior</option>
+  <option>454 GS</option>
+  <option>GS FLX</option>
+  <option>GS 20</option>
+  <option>Solexa 1G Genome Analyzer</option>
+  <option>AB SOLiD 4 System</option>
+  <option>AB SOLiD System 2.0</option>
+  <option>AB SOLiD System 3.0</option>
+  <option>AB SOLiD System</option>
+  <option>Helicos HeliScope</option>
+  <option>PacBio RS</option>
+  <option>Ion Torrent PGM</option>
+  <option>Complete Genomics</option>
+  <option>unspecified</option>
+  <option>UNKNOWN</option>
+  <option>NULL</option>
+ </select>
+ </td>
+ <th style="text-align:right;">
+ Taxon ID:
+ </th><td>
+ <input type="text" id="taxon_id" name="taxon_id" value="">
+
+ incl. child taxonomy (ex. strains)
+ <input type="checkbox" id="taxon_tree" name="taxon_tree" value="on">
+ </td>
+ <td style="width: 100px; text-align:right;">
+  <input type="submit" value="Search" style="background-color: lightskyblue;">
+ </td>
+ </tr>
+ <tr>
+  <td colspan="4"><br></td>
+  <th style="text-align:right;">Species name:</th>
+  <td>
+   <input type="text" id="taxon_in" name="taxon_in" value="">
+  </td>
+  <td><br></td>
+ </tr>
+</table>
+</form>
+
+<br>
+<div id="taxon_info">
+ <span id="taxon_parent">
+   <a href="?type=&platform=&taxon_id=&taxon_tree=">PARENT</a> &gt;
+ </span>
+ <span id="taxon_self" style="font-weight: bold;">
+   TAXON
+ </span>
+</div>
+<br>
+
+<div id="container"></div>
+
+<br>
+
+<div style="text-align: right;">
+ <a href="../">&#8594; back to SRAs top</a>
+</div>
+
+<br>
+
+<div class="footer">
+ <div class="footer_msg">
+  <a href="http://dbcls.rois.ac.jp/"><img src="http://lifesciencedb.jp/image/dbcls_logo_small.jpg" alt="DBCLS logo"></a>
+ </div>
+</div>
+
+</body>
+</html>
