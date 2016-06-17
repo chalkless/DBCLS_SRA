@@ -1,11 +1,66 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
-                      "http://www.w3.org/TR/html4/loose.dtd">
-<html lang="ja">
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other
+         head content must come *after* these tags -->
 
-<meta http-equiv="content-type" content="text/html; charset=utf-8">
-<meta http-equiv="content-style-type" content="text/css">
-<meta http-equiv="content-script-type" content="text/javascript">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-style-type" content="text/css">
+    <meta http-equiv="content-script-type" content="text/javascript">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"/>
+    <link rel="stylesheet" href="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.css"/> 
+
+    <script src="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.js"></script>
+
+    <script>
+      <!--
+         jQuery(function($){
+	   $.extend( $.fn.dataTable.defaults, {
+	           language: {
+		   url: "http://cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Japanese.json"
+                   }
+           });
+
+	   $("#tmp").dataTable({
+	     ajax: { url: "taxon2study.php", dataSrc: ''},
+	     columns : [
+	       { data: "ra",
+	         render: function(data, type, full, meta) {
+		         return '<a href=\"http://trace.ddbj.nig.ac.jp/DRASearch/submission?acc='+ data +'\">'+ data +'</a>'; }
+		 },
+	       { data: "rp",
+	         render: function(data, type, full, meta) {
+		         return '<a href=\"http://trace.ddbj.nig.ac.jp/DRASearch/study?acc='+ data +'\">'+ data +'</a>'; }
+	         },
+	       { data: "study_title" },
+	       { data: "study_type" },
+	       { data: "taxon_id",
+	         render: function(data, type, full, meta) {
+		   return '<a href=\"?taxon_id=' + data + '&taxon_tree=\">' + data+ '</a>'; }
+		 }
+	       },
+	       { data: "scientific_name" },
+	       { data: "exps",
+	         render: function(data, type, full, meta) {
+		   return '<a href=\"./experimentlist.cgi?rp=' + full.rp + '\">' + data + '</a>'; }
+		 }
+	       },
+	       { data: "runs",
+	         render: function(data, type, full, meta) {
+	           rerurn '<a href=\"./runlist.cgi?rp=' + full.rp + '\">' + data + '</a>'; }
+	       },
+	       { data: "update_date" }
+	     ],
+	   });
+	 });
+      -->
+    </script>
+
 
 <link rel="stylesheet" type="text/css" href="../css/fonts/fonts-min.css">
 <link rel="stylesheet" type="text/css" href="../css/datatable/assets/skins/sam/datatable.css">
@@ -121,7 +176,7 @@ YAHOO.util.Event.onContentReady("container", function() {
 <h1>Project List from taxonomy (&beta; version)</h1>
 
 <div style="text-align: right;">
- <a href="../">&#8594; back to SRAs top</a>
+ <a href="../">&#8594; back to DBCLS SRA top</a>
 </div>
 
 <form action="taxon2study.cgi" method="get">
@@ -216,19 +271,37 @@ YAHOO.util.Event.onContentReady("container", function() {
 
 <div id="container"></div>
 
+<div id="tmp"></div>
+
 <br>
 
 <div style="text-align: right;">
- <a href="../">&#8594; back to SRAs top</a>
+ <a href="../">&#8594; back to DBCLS SRA top</a>
 </div>
 
 <br>
 
 <div class="footer">
  <div class="footer_msg">
-  <a href="http://dbcls.rois.ac.jp/"><img src="http://lifesciencedb.jp/image/dbcls_logo_small.jpg" alt="DBCLS logo"></a>
+<!--  <a href="http://dbcls.rois.ac.jp/"><img
+ src="http://lifesciencedb.jp/image/dbcls_logo_small.jpg" alt="DBCLS
+ logo"></a> -->
+  <a href="http://dbcls.rois.ac.jp/">
+    <img src="http://dbcls.rois.ac.jp/wp-content/uploads/2014/11/logo_en_c.png"
+         width="100">
+   </a>
  </div>
 </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></scr\
+ipt>
+    <!-- Include all compiled plugins (below), or include individual -->
+    <!-- files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></s\
+cript>
+
+
 
 </body>
 </html>
