@@ -47,9 +47,63 @@ ln -s SRA.AXR.210610.tab exp_runWK.tab
 ```
 
 ```
+$ mysql -u sra -p -b sra < ./sql/phase1.sql
+```
+
+```
 ...
 $ mysqlimport -u sra -p --local --delete sra exp_runWK.tab
+```
+Experimentが11桁になっていたり、RUNやSAMPLEが12桁になっていたり。
+
+```
+$ mysql -u sra -p -b sra < ./sql/phase2.sql
+```
+```
+CREATE TABLE study_typeWK(
+        id integer auto_increment primary key,
+        typetext text
+);
+CREATE TABLE IF NOT EXISTS study_type(
+        id integer auto_increment primary key,
+        typetext text
+);
+
+
+insert into study_typeWK(typetext) values('Transcriptome Analysis');
+insert into study_typeWK(typetext) values('Metagenomics');
+insert into study_typeWK(typetext) values('Epigenetics');
+insert into study_typeWK(typetext) values('Resequencing');
+insert into study_typeWK(typetext) values('Gene Regulation Study');
+insert into study_typeWK(typetext) values('Population Genomics');
+insert into study_typeWK(typetext) values('RNASeq');
+insert into study_typeWK(typetext) values('Cancer Genomics');
+insert into study_typeWK(typetext) values('Forensic or Paleo-genomics');
+insert into study_typeWK(typetext) values('Synthetic Genomics');
+insert into study_typeWK(typetext) values('Whole Genome Sequencing');
+insert into study_typeWK(typetext) values('Other');
+```
+見直ししたい
+
+
+
+study/exp/run/sample/submissionのparse
+
+submissionのparseはupdated/published/receivedとあるのでpublishedとupdated両方出したい
+```
+Accession       Submission      Status  Updated Published       Received       Type     Center  Visibility      Alias   Experiment      Sample  Study   Loaded Spots    Bases   Md5sum  BioSample       BioProject      ReplacedBy
+DRA000001       DRA000001       live    2021-02-05T15:52:14Z    2010-03-24T03:10:22Z    2009-06-20T02:48:01Z    SUBMISSION      KEIO    public  DRA000001      -
+        -       -       -       -       -       247a10cb6254caa26f2ca64f49bc0271
+        -       -       -
+DRP000001       DRA000001       live    2020-08-25T15:30:25Z    2015-07-31T15:20:44Z    2009-06-20T02:48:02Z    STUDY   KEIO    public  DRP000001       -      -
+        -       -       -       -       2072beecdd9e29f6cbd5903cff0de32c       -
+        PRJDA38027      -
 ```
 
 
 
+```
+$ mysqlimport -u sra -p --local --delete sra update_manual/210610/studyWK.tab
+$ mysqlimport -u sra -p --local --delete sra update_manual/210610/expWK.tab
+$ mysqlimport -u sra -p --local --delete sra update_manual/210610/sampleWK.tab
+```
