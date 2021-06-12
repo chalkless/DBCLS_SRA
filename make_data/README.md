@@ -92,22 +92,12 @@ study/exp/run/sample/submissionのparse
 submissionのparseはupdated/published/receivedとあるのでpublishedとupdated両方出したい
 ```
 Accession       Submission      Status  Updated Published       Received       Type     Center  Visibility      Alias   Experiment      Sample  Study   Loaded Spots    Bases   Md5sum  BioSample       BioProject      ReplacedBy
-DRA000001       DRA000001       live    2021-02-05T15:52:14Z    2010-03-24T03:10:22Z    2009-06-20T02:48:01Z    SUBMISSION      KEIO    public  DRA000001      -
-        -       -       -       -       -       247a10cb6254caa26f2ca64f49bc0271
-        -       -       -
-DRP000001       DRA000001       live    2020-08-25T15:30:25Z    2015-07-31T15:20:44Z    2009-06-20T02:48:02Z    STUDY   KEIO    public  DRP000001       -      -
-        -       -       -       -       2072beecdd9e29f6cbd5903cff0de32c       -
-        PRJDA38027      -
-DRR000001       DRA000001       live    2021-02-05T15:52:14Z    2010-03-24T03:10:22Z    2009-06-20T02:48:04Z    RUN     KEIO    public  2008-09-12.BEST195-Lane7
-        DRX000001       DRS000001       DRP000001       1       10148174       730668528        252bccb8e87c5a3010bead90ce5f5614        SAMD00016353    PRJDA38027      -
-DRS000001       DRA000001       live    2015-03-26T21:32:35Z    2010-03-24T03:10:22Z    2009-06-20T02:48:03Z    SAMPLE  BioSample       public  SAMD00016353   -
-        -       -       -       -       -       764b0110478fa0755d9d81887339ce59
-        SAMD00016353    -       -
-DRX000001       DRA000001       live    2015-01-30T13:21:34Z    2010-03-24T03:10:22Z    2009-06-20T02:48:03Z    EXPERIMENT      KEIO    public  DRX000001      -
-        DRS000001       DRP000001       -       -       -       1389579d7a3e83b5100ab5bd07e00873        SAMD00016353    PRJDA38027      -
-DRA000002       DRA000002       live    2021-02-12T21:15:54Z    2010-03-24T03:11:55Z    2009-08-04T07:37:02Z    SUBMISSION      KEIO    public  DRA000002      -
-        -       -       -       -       -       c4e77d833c5ac18a4dd8756fcb5dbead
-        -       -       -
+DRA000001       DRA000001       live    2021-02-05T15:52:14Z    2010-03-24T03:10:22Z    2009-06-20T02:48:01Z    SUBMISSION      KEIO    public  DRA000001      -        -       -       -       -       -       247a10cb6254caa26f2ca64f49bc0271        -       -       -
+DRP000001       DRA000001       live    2020-08-25T15:30:25Z    2015-07-31T15:20:44Z    2009-06-20T02:48:02Z    STUDY   KEIO    public  DRP000001       -      -        -       -       -       -       2072beecdd9e29f6cbd5903cff0de32c       -        PRJDA38027      -
+DRR000001       DRA000001       live    2021-02-05T15:52:14Z    2010-03-24T03:10:22Z    2009-06-20T02:48:04Z    RUN     KEIO    public  2008-09-12.BEST195-Lane7        DRX000001       DRS000001       DRP000001       1       10148174       730668528        252bccb8e87c5a3010bead90ce5f5614        SAMD00016353    PRJDA38027      -
+DRS000001       DRA000001       live    2015-03-26T21:32:35Z    2010-03-24T03:10:22Z    2009-06-20T02:48:03Z    SAMPLE  BioSample       public  SAMD00016353   -        -       -       -       -       -       764b0110478fa0755d9d81887339ce59        SAMD00016353    -       -
+DRX000001       DRA000001       live    2015-01-30T13:21:34Z    2010-03-24T03:10:22Z    2009-06-20T02:48:03Z    EXPERIMENT      KEIO    public  DRX000001      -        DRS000001       DRP000001       -       -       -       1389579d7a3e83b5100ab5bd07e00873        SAMD00016353    PRJDA38027      -
+DRA000002       DRA000002       live    2021-02-12T21:15:54Z    2010-03-24T03:11:55Z    2009-08-04T07:37:02Z    SUBMISSION      KEIO    public  DRA000002      -        -       -       -       -       -       c4e77d833c5ac18a4dd8756fcb5dbead        -       -       -
 ```
 
 
