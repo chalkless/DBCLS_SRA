@@ -100,10 +100,23 @@ DRX000001       DRA000001       live    2015-01-30T13:21:34Z    2010-03-24T03:10
 DRA000002       DRA000002       live    2021-02-12T21:15:54Z    2010-03-24T03:11:55Z    2009-08-04T07:37:02Z    SUBMISSION      KEIO    public  DRA000002      -        -       -       -       -       -       c4e77d833c5ac18a4dd8756fcb5dbead        -       -       -
 ```
 
-
+```
+$ ext.xml2tab.pl
+```
 
 ```
 $ mysqlimport -u sra -p --local --delete sra update_manual/210610/studyWK.tab
 $ mysqlimport -u sra -p --local --delete sra update_manual/210610/expWK.tab
 $ mysqlimport -u sra -p --local --delete sra update_manual/210610/sampleWK.tab
+```
+```
+$ grep ^.RA /share/data/sra_meta/Metadata/SRA_Accessions.tab | perl -F"\t" -lane '$F[4] =~ s/T.*//; print join("\t", $F[0], $F[4])' > submissionWK.tab
+```
+```
+$ mysqlimport -u sra -p --local --delete sra update_manual/210610/submissionWK.tab
+```
+
+```
+$ mysql -u sra -p -b sra < sql/phase3.sql
+$ mysql -u sra -p -b sra < sql/fwd.sql
 ```
