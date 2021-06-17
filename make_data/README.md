@@ -120,3 +120,81 @@ $ mysqlimport -u sra -p --local --delete sra update_manual/210610/submissionWK.t
 $ mysql -u sra -p -b sra < sql/phase3.sql
 $ mysql -u sra -p -b sra < sql/fwd.sql
 ```
+
+
+
+## 生物種によるSRAデータの検索...のためのデータ作成
+- mk.study2wtaxon.sh
+- taxdump.tar.gz/taxcat.tar.gz を解凍（定期的にダウンロードしている?）
+- taxonomyを処理: ext.node.pl/mk.tree.pl →　taxonomy.node.$DATE.tab/taxonomy.tree.$DATE.tab
+- taxontree/taxonomy.tree.sqlでSQLにつっこむ
+```
+create table if not exists taxonomy_tree (
+       taxon_id varchar(7),
+       tree_id varchar(400),
+       taxon_id_species varchar(7),
+       taxon_name varchar(200),
+       rank varchar(30),
+       taxon_group varchar(30)
+);
+
+load data local infile 'taxonomy.tree.tab' replace into table taxonomy_tree;
+```
+- MySQL で study2テーブルをstudy2.tabに吐く
+- mk.study2wtaxon.pl: taxonomy.tree.tab + study.tab →study2wtaxon.tab
+- study2wtaxon.tab をSQLにつっこむ
+
+- study2 テーブルは
+  - fwd.sql でstudy2WKテーブルから名前変換
+  - study2WK テーブルはphase3.sqlで作成
+```
+DROP TABLE IF EXISTS study2WK;
+CREATE TABLE study2WK (
+        id integer auto_increment primary key,
+        RA varchar(12),
+        RP varchar(12),
+        STUDY_TITLE text,
+        STUDY_TYPE text,
+        UPDATE_DATE Datetime,
+        TAXON_ID integer,
+        SCIENTIFIC_NAME text,
+        COMMON_NAME text,
+        PLATFORM text
+        );
+CREATE TABLE IF NOT EXISTS study2 (
+        id integer auto_increment primary key,
+        RA varchar(12),
+        RP varchar(12),
+        STUDY_TITLE text,
+        STUDY_TYPE text,
+        UPDATE_DATE Datetime,
+        TAXON_ID integer,
+        SCIENTIFIC_NAME text,
+        COMMON_NAME text,
+        PLATFORM text
+        );
+
+INSERT INTO study2WK(RA,RP,STUDY_TITLE,STUDY_TYPE,UPDATE_DATE,TAXON_ID,SCIENTIFIC_NAME,COMMON_NAME,PLATFORM) select distinct A.RA,A.RP,A.STUDY_TITLE,A.STUDY_TYPE,A.UPDATE_DATE,B.TAXON_ID,B.SCIENTIFIC_NAME,B.COMMON_NAME,B.PLATFORM from studyWK A left outer join experiment3WK B on (A.RP = B.RP);
+```
+- studyWK + experiment3WK → study2K
+- studyWK
+```
+CREATE TABLE experiment3WK (
+        RP varchar(12),
+        RX varchar(12),
+        TITLE text,
+        RS varchar(12),
+        TAXON_ID integer,
+        SCIENTIFIC_NAME text,
+        COMMON_NAME text,
+        WORD text,
+        SAMPLES text,
+        DESCRIPTION text,
+        RUNS integer,
+        RA varchar(12),
+        PLATFORM text,
+        SIZE integer
+        );
+INSERT INTO experiment3WK select A.RP,A.RX,coalesce(A.TITLE,'&lt;NO DATA&gt;') as TITLE,A.RS,A.TAXON_ID,coalesce(C.scientific_name,'&lt;NO DATA&gt;') as scientific_name,coalesce(A.COMMON_NAME,'&lt;NO DATA&gt;') as COMMON_NAME,coalesce(A.SAMPLES,concat('<DESCRIPTION>',A.DESCRIPTION),'&lt;NO DATA&gt;') as WORD,A.SAMPLES,A.DESCRIPTION,B.summary,A.RA,A.PLATFORM,coalesce(D.SIZE,0) from experiment2WK A left join sum_run2WK B on (A.RX = B.RX) left join taxidWK C on (A.TAXON_ID = C.taxid) left join sizeWK D on (A.RX=D.RX AND A.RA=D.RA) ;
+```
+- experiment2 + sum_run2WK + taxidWK + sizeWK → experiment3WK
