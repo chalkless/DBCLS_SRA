@@ -125,6 +125,23 @@ $ mysql -u sra -p -b sra < sql/fwd.sql
 
 ## 生物種によるSRAデータの検索...のためのデータ作成
 - mk.study2wtaxon.sh
+```
+$ less mk.study2wtaxon.sql
+CREATE TABLE IF NOT EXISTS study2wtaxon (
+       id int(11),
+       RA varchar(9),
+       RP varchar(9),
+       STUDY_TITLE text,
+       STUDY_TYPE text,
+       UPDATE_DATE datetime,
+       TAXON_ID varchar(11),
+       TREE_ID varchar(400),
+       SCIENTIFIC_NAME text,
+       COMMON_NAME text,
+       PLATFORM text
+);
+```
+
 - taxdump.tar.gz/taxcat.tar.gz を解凍（定期的にダウンロードしている?）
 - taxonomyを処理: ext.node.pl/mk.tree.pl →　taxonomy.node.$DATE.tab/taxonomy.tree.$DATE.tab
 - taxontree/taxonomy.tree.sqlでSQLにつっこむ
