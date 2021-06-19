@@ -102,7 +102,15 @@ DRA000002       DRA000002       live    2021-02-12T21:15:54Z    2010-03-24T03:11
 
 ```
 $ ext.xml2tab.pl
+
+print OUTSTUDY join("\t", $ra, $rp, $title, $type, $update)."\n" ...
+print OUTEXP join("\t", $ra, $rp, $rx, $title, $platform)."\n" ...
+print OUTSAMPLE join("\t", $ra, $rs, $name, $title, $desc, $taxon_id)."\n";
+
 ```
+
+
+
 
 ```
 $ mysqlimport -u sra -p --local --delete sra update_manual/210610/studyWK.tab
@@ -144,6 +152,11 @@ CREATE TABLE IF NOT EXISTS study2wtaxon (
 
 - taxdump.tar.gz/taxcat.tar.gz を解凍（定期的にダウンロードしている?）
 - taxonomyを処理: ext.node.pl/mk.tree.pl →　taxonomy.node.$DATE.tab/taxonomy.tree.$DATE.tab
+```
+print join("\t", $each_taxonid, $tree, $each_species, $each_annot)."\n";
+66420   0000001:...::0066420 66420   Papilio xuthus  species Invertebrates
+($id2annot{$taxon_id} = join("\t", $name, $rank, $group);)
+```
 - taxontree/taxonomy.tree.sqlでSQLにつっこむ
 ```
 create table if not exists taxonomy_tree (
