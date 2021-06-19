@@ -228,3 +228,19 @@ CREATE TABLE experiment3WK (
 INSERT INTO experiment3WK select A.RP,A.RX,coalesce(A.TITLE,'&lt;NO DATA&gt;') as TITLE,A.RS,A.TAXON_ID,coalesce(C.scientific_name,'&lt;NO DATA&gt;') as scientific_name,coalesce(A.COMMON_NAME,'&lt;NO DATA&gt;') as COMMON_NAME,coalesce(A.SAMPLES,concat('<DESCRIPTION>',A.DESCRIPTION),'&lt;NO DATA&gt;') as WORD,A.SAMPLES,A.DESCRIPTION,B.summary,A.RA,A.PLATFORM,coalesce(D.SIZE,0) from experiment2WK A left join sum_run2WK B on (A.RX = B.RX) left join taxidWK C on (A.TAXON_ID = C.taxid) left join sizeWK D on (A.RX=D.RX AND A.RA=D.RA) ;
 ```
 - experiment2 + sum_run2WK + taxidWK + sizeWK → experiment3WK
+
+- 出力
+```
+ var columns = [
+    {key: "ra",  label: "SRA ID", sortable: true, formatter: YAHOO.widget.DataTable.formatLink1 },
+    {key: "rp",  label: "Study ID", sortable: true, formatter: YAHOO.widget.DataTable.formatLink2 },
+    {key: "study_title",    label: "Study Title",     sortable: true},
+    {key: "study_type",     label: "Study Type",      sortable: true},
+    {key: "taxon_id",       label: "Taxon ID",        sortable: true,   formatter: YAHOO.widget.DataTable.formatLink5 },
+    {key: "scientific_name",    label: "Taxon Name",  sortable: true},
+    {key: "exps",        label: "Exps",            sortable: true,  formatter: YAHOO.widget.DataTable.formatLink3 },
+    {key: "runs",        label: "Runs",            sortable: true, formatter: YAHOO.widget.DataTable.formatLink4 },
+    {key: "update_date",   label: "Update",         sortable: true}
+  ];
+```
+- 検索例: http://test-sra.dbcls.jp/cgi-bin/taxon2study.cgi?taxon_id=8782
