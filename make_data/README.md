@@ -108,8 +108,14 @@ print OUTEXP join("\t", $ra, $rp, $rx, $title, $platform)."\n" ...
 print OUTSAMPLE join("\t", $ra, $rs, $name, $title, $desc, $taxon_id)."\n";
 
 ```
-
-
+sampleの$descにゴミ多い
+```
+    @ele = split(/\t/, $line_sample);
+    $ra = $ele[0];
+    $rp = $ele[1];
+    $name = $ele[2];
+    $tax_id = $ele[-1];
+```
 
 
 ```
@@ -244,3 +250,10 @@ INSERT INTO experiment3WK select A.RP,A.RX,coalesce(A.TITLE,'&lt;NO DATA&gt;') a
   ];
 ```
 - 検索例: http://test-sra.dbcls.jp/cgi-bin/taxon2study.cgi?taxon_id=8782
+
+- merge.pl を暫定的に書いた
+  - taxonomy.tree.tab を taxonomy ID でgrep
+  - taxonomy.tree.[taxon].tab をparsee taxid->treeid
+  - study_sampleWK.tab を parse: ra->rp
+  - studyWK.tab を parse: rp->title/type/date
+  - sampleWK.tab を parse: ...
