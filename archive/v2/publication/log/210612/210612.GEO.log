@@ -1,0 +1,7 @@
+0.today=210612
+1. :GEO-> all uid list
+- 210612.GEO.UIDlst
+getEsearch.py> error..getData()
+getEsearch.py> error..uidoutput()
+http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=gds&term=(expression+profiling+by+high+throughput+sequencing[DataSet+Type]+OR+genome+binding/occupancy+profiling+by+high+throughput+sequencing[DataSet+Type]+OR+genome+variation+profiling+by+high+throughput+sequencing[DataSet+Type]+OR+methylation+profiling+by+high+throughput+sequencing[DataSet+Type]+OR+non+coding+rna+profiling+by+high+throughput+sequencing[DataSet+Type])+AND+2021/05/29:2021/06/12[PDAT]&retstart=0&retmax=30&usehistory=y
+- uid is nothing. done.

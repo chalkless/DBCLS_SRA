@@ -1,0 +1,10 @@
+set ftp:use-mdtm no
+set ftp:timezone -9
+
+open ftp.ncbi.nlm.nih.gov
+#cd /pub/geo/DATA/SOFT/by_series/
+cd /geo/series/
+lcd /share/data/geo/
+mirror --delete --only-newer --verbose --include-glob "*.soft.gz"
+close
+quit
