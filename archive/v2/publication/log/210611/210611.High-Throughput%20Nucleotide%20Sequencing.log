@@ -1,0 +1,122 @@
+0.today=210611
+1.MeSH term -> pmid List :
+- 210611.High-Throughput%20Nucleotide%20Sequencing.pmidlst
+Traceback (most recent call last):
+  File "pubmed_esearch_mesh.py", line 87, in <module>
+    main()
+  File "pubmed_esearch_mesh.py", line 84, in main
+    esearch_mesh(meshterm,filename)
+  File "pubmed_esearch_mesh.py", line 70, in esearch_mesh
+    idnum = idNum(meshterm)
+  File "pubmed_esearch_mesh.py", line 32, in idNum
+    page = urllib.urlopen(url_forcount)
+  File "/usr/lib64/python2.7/urllib.py", line 84, in urlopen
+    return opener.open(url)
+  File "/usr/lib64/python2.7/urllib.py", line 205, in open
+    return getattr(self, name)(url)
+  File "/usr/lib64/python2.7/urllib.py", line 356, in open_http
+    return self.http_error(url, fp, errcode, errmsg, headers)
+  File "/usr/lib64/python2.7/urllib.py", line 369, in http_error
+    result = method(url, fp, errcode, errmsg, headers)
+  File "/usr/lib64/python2.7/urllib.py", line 663, in http_error_301
+    return self.http_error_302(url, fp, errcode, errmsg, headers, data)
+  File "/usr/lib64/python2.7/urllib.py", line 632, in http_error_302
+    data)
+  File "/usr/lib64/python2.7/urllib.py", line 659, in redirect_internal
+    return self.open(newurl)
+  File "/usr/lib64/python2.7/urllib.py", line 205, in open
+    return getattr(self, name)(url)
+  File "/usr/lib64/python2.7/urllib.py", line 435, in open_https
+    h.endheaders(data)
+  File "/usr/lib64/python2.7/httplib.py", line 951, in endheaders
+    self._send_output(message_body)
+  File "/usr/lib64/python2.7/httplib.py", line 811, in _send_output
+    self.send(msg)
+  File "/usr/lib64/python2.7/httplib.py", line 773, in send
+    self.connect()
+  File "/usr/lib64/python2.7/httplib.py", line 1158, in connect
+    self.sock = ssl.wrap_socket(sock, self.key_file, self.cert_file)
+  File "/usr/lib64/python2.7/ssl.py", line 372, in wrap_socket
+    ciphers=ciphers)
+  File "/usr/lib64/python2.7/ssl.py", line 134, in __init__
+    self.do_handshake()
+  File "/usr/lib64/python2.7/ssl.py", line 296, in do_handshake
+    self._sslobj.do_handshake()
+IOError: [Errno socket error] [Errno 1] _ssl.c:503: error:1407742E:SSL routines:SSL23_GET_SERVER_HELLO:tlsv1 alert protocol version
+2.pmid List -> all puid2sra and article data :
+- 210611.High-Throughput%20Nucleotide%20Sequencing.pmidlst.pmid2sra
+Traceback (most recent call last):
+  File "pmid2sra_list.py", line 17, in <module>
+    import sys, time, pmid2sra
+  File "/share/work/sra/publication/pmid2sra.py", line 251, in <module>
+    run(PMID, OUT_FILE, removeFlag,OUT_ERROR_FILE)
+  File "/share/work/sra/publication/pmid2sra.py", line 233, in run
+    downloadXML(pmid, "pubmed", filename_pm)
+  File "/share/work/sra/publication/pmid2sra.py", line 88, in downloadXML
+    urllib.urlretrieve(url, filename)
+  File "/usr/lib64/python2.7/urllib.py", line 91, in urlretrieve
+    return _urlopener.retrieve(url, filename, reporthook, data)
+  File "/usr/lib64/python2.7/urllib.py", line 237, in retrieve
+    fp = self.open(url, data)
+  File "/usr/lib64/python2.7/urllib.py", line 205, in open
+    return getattr(self, name)(url)
+  File "/usr/lib64/python2.7/urllib.py", line 356, in open_http
+    return self.http_error(url, fp, errcode, errmsg, headers)
+  File "/usr/lib64/python2.7/urllib.py", line 369, in http_error
+    result = method(url, fp, errcode, errmsg, headers)
+  File "/usr/lib64/python2.7/urllib.py", line 663, in http_error_301
+    return self.http_error_302(url, fp, errcode, errmsg, headers, data)
+  File "/usr/lib64/python2.7/urllib.py", line 632, in http_error_302
+    data)
+  File "/usr/lib64/python2.7/urllib.py", line 659, in redirect_internal
+    return self.open(newurl)
+  File "/usr/lib64/python2.7/urllib.py", line 205, in open
+    return getattr(self, name)(url)
+  File "/usr/lib64/python2.7/urllib.py", line 435, in open_https
+    h.endheaders(data)
+  File "/usr/lib64/python2.7/httplib.py", line 951, in endheaders
+    self._send_output(message_body)
+  File "/usr/lib64/python2.7/httplib.py", line 811, in _send_output
+    self.send(msg)
+  File "/usr/lib64/python2.7/httplib.py", line 773, in send
+    self.connect()
+  File "/usr/lib64/python2.7/httplib.py", line 1158, in connect
+    self.sock = ssl.wrap_socket(sock, self.key_file, self.cert_file)
+  File "/usr/lib64/python2.7/ssl.py", line 372, in wrap_socket
+    ciphers=ciphers)
+  File "/usr/lib64/python2.7/ssl.py", line 134, in __init__
+    self.do_handshake()
+  File "/usr/lib64/python2.7/ssl.py", line 296, in do_handshake
+    self._sslobj.do_handshake()
+IOError: [Errno socket error] [Errno 1] _ssl.c:503: error:1407742E:SSL routines:SSL23_GET_SERVER_HELLO:tlsv1 alert protocol version
+3.access to journal Sites :
+- 210611.High-Throughput%20Nucleotide%20Sequencing.pmidlst.pmid2sra.journal2sra
+Traceback (most recent call last):
+  File "journal2sra.py", line 186, in <module>
+    main(sys.argv[1],sys.argv[2],sys.argv[3])
+  File "journal2sra.py", line 159, in main
+    f=open(pmidlstfile,"r")
+IOError: [Errno 2] No such file or directory: '210611.High-Throughput%20Nucleotide%20Sequencing.pmidlst.pmid2sra'
+4.[SRA ID] xRx -> SRA : 
+- 210611.High-Throughput%20Nucleotide%20Sequencing.pmidlst.pmid2sra.journal2sra.xrx2xra
+Traceback (most recent call last):
+  File "xrx2xra_formysql.py", line 146, in <module>
+    main(pmid2srafile,output,outputerr)
+  File "xrx2xra_formysql.py", line 134, in main
+    pmid2sras = load(pmid2srafile)
+  File "xrx2xra_formysql.py", line 88, in load
+    fr = open(pmid2srafile,"r")
+IOError: [Errno 2] No such file or directory: '210611.High-Throughput%20Nucleotide%20Sequencing.pmidlst.pmid2sra.journal2sra'
+4.diff pmid2sra :
+- 210611.High-Throughput%20Nucleotide%20Sequencing.pmidlst.pmid2sra.journal2sra.xrx2xra.diff_pmid2sra
+- 210611.High-Throughput%20Nucleotide%20Sequencing.pmidlst.pmid2sra.journal2sra.xrx2xra.diff_pmid2sra_article
+diff_pmid2sra.py: not found this file.>210611.High-Throughput%20Nucleotide%20Sequencing.pmidlst.pmid2sra.journal2sra.xrx2xra
+6.update to MySQL :
+- 210611.High-Throughput%20Nucleotide%20Sequencing.pmidlst.pmid2sra.journal2sra.xrx2xra.diff_pmid2sra
+- 210611.High-Throughput%20Nucleotide%20Sequencing.pmidlst.pmid2sra.journal2sra.xrx2xra.diff_pmid2sra_article
+load_file.py: not found this file.
+/share/work/sra/publication/210611.High-Throughput%20Nucleotide%20Sequencing.pmidlst.pmid2sra.journal2sra.xrx2xra.diff_pmid2sra_article
+load_file.py: not found this file.
+/share/work/sra/publication/210611.High-Throughput%20Nucleotide%20Sequencing.pmidlst.pmid2sra.journal2sra.xrx2xra.diff_pmid2sra
+last_update.txt
+today update done.
